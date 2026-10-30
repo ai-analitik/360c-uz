@@ -865,8 +865,8 @@ function countUp(){ document.querySelectorAll('[data-count]').forEach(el=>{ cons
 
 /* ---------- header goes solid once you scroll ---------- */
 /* our projects strip: repeated so the loop never shows a gap on wide screens */
-const PROJ=['med.comix','tech.comix','saif.multix','vet.maslahat','agar.comix'];
-(()=>{ const one=PROJ.map(h=>`<a href="https://www.instagram.com/${h}/" target="_blank" rel="noopener">${h}</a>`).join(''); const half=one.repeat(4); const m=document.getElementById('marq'); m.innerHTML=half+half; m.querySelectorAll('a').forEach((a,i)=>{ if(i>=PROJ.length*4){ a.tabIndex=-1; a.setAttribute('aria-hidden','true'); } }); })();
+const PROJ=['med.comix','tech.comix','vet.maslahat','agar.comix'];
+(()=>{ const one=PROJ.map(h=>`<a href="https://www.instagram.com/${h}/" target="_blank" rel="noopener">${h}</a>`).join(''); const half=one.repeat(5); const m=document.getElementById('marq'); m.innerHTML=half+half; m.querySelectorAll('a').forEach((a,i)=>{ if(i>=PROJ.length*5){ a.tabIndex=-1; a.setAttribute('aria-hidden','true'); } }); })();
 const hdr=document.querySelector('header.top'); const solid=()=>hdr.classList.toggle('solid',scrollY>24); addEventListener('scroll',solid,{passive:true}); solid();
 
 /* ---------- init lang ---------- */
