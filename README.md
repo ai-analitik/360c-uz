@@ -1,4 +1,4 @@
-# 360c kursi — sayt (360c.uz)
+# 360 Kadr — kurs va video buyurtma sayti (360c.uz)
 
 med.comix jamoasining "AI bilan video yasash" kursi va video buyurtma xizmati sayti (UZ/RU).
 
