@@ -267,31 +267,64 @@ header.top.solid .bar{background:none}
 .cd span{display:block;margin-top:6px;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 .qrrow{display:flex;gap:20px;align-items:center;margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
 .qrrow img{width:108px;height:108px;border-radius:8px;flex:none}
-/* video service */
-#xizmat{padding-top:clamp(64px,8vw,120px);padding-bottom:clamp(64px,8vw,120px)}
-.svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(40px,6vw,90px);align-items:center}
-.svc h2{margin-top:14px}
-.svc-sub{color:var(--mute);font-size:clamp(16px,1.4vw,18px);line-height:1.5;margin:18px 0 0;max-width:420px}
-.svc-list{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:480px}
-.svc-list li{background:var(--ink3);border-radius:12px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px;min-height:96px}
-.svc-list span{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--ember)}
-.svc-list b{font-family:var(--f-display);font-weight:400;font-size:clamp(19px,1.7vw,22px);line-height:1.15;margin-top:auto}
-.svc-list small{font-size:12.5px;color:var(--mute);margin-top:-2px}
-.svc-btn{margin-top:30px;padding:16px 28px;font-size:16px}
-.svc-btn svg{width:16px;height:16px;transition:transform .25s}
-.svc-btn:hover svg{transform:translateX(4px)}
-.svc-note{margin:14px 0 0;font-size:13px;color:var(--mute)}
-.svc-wall{position:relative;height:clamp(420px,46vw,620px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;overflow:hidden;transform:perspective(1400px) rotateY(-9deg) rotateX(3deg);-webkit-mask:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
-.svc-wall .col{display:flex;flex-direction:column;gap:14px;animation:svcUp 40s linear infinite;will-change:transform}
-.svc-wall .col.down{animation-name:svcDown;animation-duration:36s;animation-delay:-9s}
-.svc-wall .col.slow{animation-duration:44s;animation-delay:-20s}
-.svc-wall img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;display:block;box-shadow:0 10px 30px rgba(0,0,0,.45)}
-@keyframes svcUp{from{transform:translateY(0)}to{transform:translateY(calc(-50% - 7px))}}
-@keyframes svcDown{from{transform:translateY(calc(-50% - 7px))}to{transform:translateY(0)}}
-@media (max-width:900px){.svc{grid-template-columns:1fr}.svc-wall{order:-1;height:300px;transform:none;gap:10px}.svc-wall .col{gap:10px}}
-@media (max-width:420px){.svc-btn{width:100%}}
-@media (prefers-reduced-motion:reduce){.svc-wall .col{animation:none}}
-@media (max-width:1100px){.brand span{display:none}}
+/* products: a 360° ring, the chosen one is read in the middle */
+.pr-hint{margin:12px 0 0;color:var(--mute);font-size:15px}
+.pr-stage{display:flex;justify-content:center;padding:58px 130px 40px}
+.pr-ring{--prface:84px;position:relative;width:min(600px,100%);aspect-ratio:1;touch-action:pan-y;outline:none;user-select:none;-webkit-user-select:none}
+.pr-ring:focus-visible .pr-track .base{stroke:var(--ember);stroke-opacity:.5}
+.pr-glow{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle,rgba(239,139,95,.13),rgba(239,139,95,0) 68%);pointer-events:none}
+.pr-track{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.pr-track .base{fill:none;stroke:rgba(239,232,220,.14);stroke-width:.25}
+.pr-track .inner{fill:none;stroke:rgba(239,232,220,.08);stroke-width:.2;stroke-dasharray:.8 1.2}
+.pr-track .prog{fill:none;stroke:var(--ember);stroke-width:.45;stroke-linecap:round;stroke-dasharray:64.4 400;stroke-dashoffset:64.4;opacity:0}
+.pr-track .prog.run{opacity:.9;animation:prProg 5s linear forwards}
+@keyframes prProg{to{stroke-dashoffset:0}}
+.pr-spin{position:absolute;inset:0;transition:transform .9s cubic-bezier(.22,.8,.2,1)}
+.pr-node{position:absolute;width:0;height:0;background:none;border:0;padding:0;cursor:pointer;color:var(--paper);font:inherit}
+.pr-node .up{position:absolute;left:0;top:0;transition:transform .9s cubic-bezier(.22,.8,.2,1)}
+.pr-node .face{position:absolute;left:calc(var(--prface)/-2);top:calc(var(--prface)/-2);width:var(--prface);height:var(--prface);border-radius:50%;background:var(--ink3);overflow:hidden;display:grid;place-items:end center;box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .35s,transform .35s,opacity .35s}
+.pr-node img{height:calc(var(--prface)*.86);width:auto;max-width:none;display:block;filter:drop-shadow(0 4px 6px rgba(0,0,0,.45))}
+.pr-node .lb{position:absolute;display:flex;flex-direction:column;gap:2px;white-space:nowrap;transition:opacity .25s}
+.pr-node .lb b{font-weight:500;font-size:14px;line-height:1.2}
+.pr-node .lb i{font-style:normal;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:var(--mute)}
+.pr-node .lb i.s{color:var(--ember)}
+.pr-node.p-top .lb{left:0;bottom:calc(var(--prface)/2 + 10px);transform:translateX(-50%);align-items:center;text-align:center}
+.pr-node.p-bottom .lb{left:0;top:calc(var(--prface)/2 + 10px);transform:translateX(-50%);align-items:center;text-align:center}
+.pr-node.p-right .lb{left:calc(var(--prface)/2 + 14px);top:0;transform:translateY(-50%);align-items:flex-start}
+.pr-node.p-left .lb{right:calc(var(--prface)/2 + 14px);top:0;transform:translateY(-50%);align-items:flex-end;text-align:right}
+.pr-node.moving .lb{opacity:0}
+.pr-node:not(.on) .face{opacity:.78}
+.pr-node:hover .face,.pr-node:focus-visible .face{opacity:1;box-shadow:inset 0 0 0 1px rgba(239,139,95,.6)}
+.pr-node.on .face{opacity:1;transform:scale(1.14);box-shadow:inset 0 0 0 2px var(--ember),0 0 34px rgba(239,139,95,.5)}
+.pr-node.on .lb b{color:var(--ember)}
+.pr-node:focus-visible{outline:none}
+.pr-core{position:absolute;inset:23%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 4%}
+.pr-core .in{display:flex;flex-direction:column;align-items:center;gap:8px;animation:prIn .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes prIn{from{opacity:0;transform:translateY(10px) scale(.98)}}
+.pr-core .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember)}
+.pr-core h3{font-family:var(--f-display);font-weight:400;font-size:clamp(20px,2.6vw,30px);line-height:1.1;margin:0;text-wrap:balance}
+.pr-core p{margin:0;color:var(--mute);font-size:14px;line-height:1.4;max-width:24em;text-wrap:balance}
+.pr-core .price{font-family:var(--f-display);font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}
+.pr-core .price small{font-family:var(--f-body);font-size:12.5px;color:var(--mute);margin-left:4px}
+.pr-core .soon{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;color:var(--ember);border:1px dashed rgba(239,139,95,.7);border-radius:4px;padding:4px 8px 3px}
+.pr-core .btn{margin-top:2px;padding:10px 18px;font-size:14.5px}
+.pr-core .btn svg{width:14px;height:14px}
+.pr-navs{display:flex;align-items:center;gap:10px;margin-top:4px;font-family:var(--f-mono);font-size:11px;color:var(--mute);letter-spacing:.08em}
+.pr-navs button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--paper);cursor:pointer;display:grid;place-items:center}
+.pr-navs button:hover{border-color:var(--paper)}
+.pr-navs svg{width:12px;height:12px}
+@media (max-width:760px){
+  .pr-stage{padding:52px 0 40px}
+  .pr-ring{--prface:58px;width:min(100%,400px)}
+  .pr-node.p-left .lb,.pr-node.p-right .lb{left:0;right:auto;top:auto;bottom:calc(var(--prface)/2 + 8px);transform:translateX(-50%);align-items:center;text-align:center}
+  .pr-node .lb b{font-size:12.5px}.pr-node .lb i{font-size:9.5px}
+  .pr-core{inset:19%}.pr-core .in{gap:6px}
+  .pr-core p{font-size:12.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.pr-core .price{font-size:18px}.pr-core .price small{display:block;margin:3px 0 0}
+  .pr-core h3{font-size:19px}
+  .pr-core .btn{padding:9px 14px;font-size:13px}
+  .pr-navs{display:none}
+}
+@media (prefers-reduced-motion:reduce){.pr-spin,.pr-node .up{transition:none}.pr-core .in{animation:none}.pr-track .prog{display:none}}
 @media (max-width:860px){.enroll{grid-template-columns:1fr}}
 
 
@@ -342,7 +375,7 @@ footer .r{display:flex;gap:22px;flex-wrap:wrap}
   <div class="bar">
     <a class="brand" href="#top"><b>360 Kadr</b></a>
     <nav class="links" aria-label="Bo‘limlar">
-      <a href="#xizmat" data-i18n="nav_svc">Video buyurtma</a>
+      <a href="#mahsulotlar" data-i18n="nav_svc">Mahsulotlar</a>
       <a href="#dastur" data-i18n="nav_prog">Dastur</a>
       <a href="#kimlar" data-i18n="nav_who">Kimlar uchun</a>
       <a href="#tarif" data-i18n="nav_price">Tariflar</a>
@@ -381,22 +414,19 @@ footer .r{display:flex;gap:22px;flex-wrap:wrap}
   <div class="hint mono"><svg width="34" height="14" viewBox="0 0 34 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 3 2 7l4 4M28 3l4 4-4 4M2 7h30"/></svg><span data-i18n="c_hint">Sahnani aylantiring</span></div>
 </section>
 
-<section class="sec" id="xizmat">
-  <div class="gut svc">
-    <div class="svc-copy">
-      <p class="eyebrow" data-i18n="x_eye">Xizmat</p>
-      <h2 data-i18n="x_h">Videoni biz yasaymiz</h2>
-      <p class="svc-sub" data-i18n="x_sub">O‘rganishga vaqt yo‘qmi? Tayyor videoni buyurtma qiling.</p>
-      <ul class="svc-list">
-        <li><span>01</span><b data-i18n="x1">Ssenariy</b></li>
-        <li><span>02</span><b data-i18n="x2">Ovoz</b><small data-i18n="x2s">o‘z ovozingizda ham</small></li>
-        <li><span>03</span><b data-i18n="x3">Montaj</b></li>
-        <li><span>04</span><b data-i18n="x4">Istalgan uslub</b></li>
-      </ul>
-      <a class="btn solid svc-btn" href="https://t.me/comix_admin" target="_blank" rel="noopener"><span data-i18n="x_btn">Video buyurtma qilish</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      <p class="svc-note" data-i18n="x_note">Narx va muddat kelishuv asosida</p>
+<section class="sec" id="mahsulotlar">
+  <div class="gut">
+    <p class="eyebrow" data-i18n="pr_eye">Mahsulotlar</p>
+    <h2 data-i18n="pr_h">Hammasi bir aylanada</h2>
+    <p class="pr-hint" data-i18n="pr_hint">Aylanadan birini tanlang.</p>
+    <div class="pr-stage">
+      <div class="pr-ring" id="prRing" tabindex="0">
+        <div class="pr-glow"></div>
+        <svg class="pr-track" viewBox="0 0 100 100" aria-hidden="true"><circle class="base" cx="50" cy="50" r="41"/><circle class="inner" cx="50" cy="50" r="33"/><circle class="prog" id="prProg" cx="50" cy="50" r="41" transform="rotate(-90 50 50)"/></svg>
+        <div class="pr-spin" id="prSpin"></div>
+        <div class="pr-core" id="prCore" aria-live="polite"></div>
+      </div>
     </div>
-    <div class="svc-wall" aria-hidden="true"><div class="col"><img src="img/f01.webp" alt="" loading="lazy"><img src="img/f03.webp" alt="" loading="lazy"><img src="img/f02.webp" alt="" loading="lazy"><img src="img/f05.webp" alt="" loading="lazy"><img src="img/f01.webp" alt="" loading="lazy"><img src="img/f03.webp" alt="" loading="lazy"><img src="img/f02.webp" alt="" loading="lazy"><img src="img/f05.webp" alt="" loading="lazy"></div><div class="col down"><img src="img/f06.webp" alt="" loading="lazy"><img src="img/f04.webp" alt="" loading="lazy"><img src="img/f07.webp" alt="" loading="lazy"><img src="img/f06.webp" alt="" loading="lazy"><img src="img/f04.webp" alt="" loading="lazy"><img src="img/f07.webp" alt="" loading="lazy"></div><div class="col slow"><img src="img/f09.webp" alt="" loading="lazy"><img src="img/f08.webp" alt="" loading="lazy"><img src="img/f10.webp" alt="" loading="lazy"><img src="img/f09.webp" alt="" loading="lazy"><img src="img/f08.webp" alt="" loading="lazy"><img src="img/f10.webp" alt="" loading="lazy"></div></div>
   </div>
 </section>
 
@@ -543,7 +573,7 @@ window.MODS=[
 ];
 window.I18N={
  uz:{},
- ru:{brand_sub:'команда med.comix',nav_prog:'Программа',nav_price:'Тарифы',cta_short:'Записаться',nav_who:'Для кого',nav_enroll:'Запись',nav_svc:'Заказ видео',
+ ru:{brand_sub:'команда med.comix',nav_prog:'Программа',nav_price:'Тарифы',cta_short:'Записаться',nav_who:'Для кого',nav_enroll:'Запись',nav_svc:'Продукты',
   strip_lbl:'Наши проекты',hero_eyebrow:'Курс · с 5 ноября',hero_h1:'Видео<br>с помощью&nbsp;ИИ',hero_sub:'Закажите видео <em>или научитесь делать его с&nbsp;нами.</em>',
   cta_main:'Записаться на курс',st1:'дней',st2:'подписчиков',st3:'охват',c_hint:'Крутите сцену',c_cap:'Нажмите на героя',
   p_eye:'10 модулей',p_h:'Чему вы научитесь',p_chip1:'01–07 · Start и Pro',p_chip2:'08–10 · только Pro',
@@ -552,6 +582,7 @@ window.I18N={
   t_h:'Тарифы',cur:'сум',s1:'<b>01–07</b> модули',s2:'<b>13+</b> стилей и разные голоса',s3:'Запуск и рост канала',s4:'Папка промптов',
   reco:'СОВЕТУЕМ',p1:'<b>Всё из Start</b>',p2:'<b>08–10:</b> автоматизация, сайт и бот, заработок',p3:'<b>Личный</b> подход и проверка',p4:'Закрытая группа и <b>место в команде</b>',p5:'Публикация в <b>med.comix</b>',pick_start:'Выбрать Start',pick_pro:'Выбрать Pro',
   once:'Оплата один раз · закрытый Telegram-канал',
+  pr_eye:'Продукты',pr_h:'Всё на одном круге',pr_hint:'Выберите на круге.',
   x_eye:'Услуга',x_h:'Видео сделаем мы',x_sub:'Нет времени учиться? Закажите готовое видео.',x1:'Сценарий',x2:'Озвучка',x2s:'можно вашим голосом',x3:'Монтаж',x4:'Любой стиль',x_btn:'Заказать видео',x_note:'Цена и сроки — по договорённости',
   path1:'Хочу научиться',path2:'Нужно готовое видео',v_order:'Заказать в этом стиле',v_learn:'Научиться этому',
   e_h:'Как записаться?',e1:'Откройте бота:',e1b:'Бот курса',e2:'Выберите тариф',e3:'Оплата:',e3b:'Админ',
@@ -579,7 +610,7 @@ function applyLang(l){
   document.querySelectorAll('[data-i18n]').forEach(el=>{el.innerHTML=t(el.dataset.i18n)});
   document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=t(el.dataset.i18nHtml)});
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false'));
-  renderMods(); tagText(); tickCd();
+  renderMods(); renderProd(); tagText(); tickCd();
   document.querySelectorAll('[data-suf]').forEach(el=>{el.textContent=el.dataset.count+' '+(l==='ru'?'млн':'mln')});
   try{localStorage.setItem('k360-lang',l)}catch(e){}
 }
@@ -623,6 +654,56 @@ function placeCards(anim){ if(!mcards.length) return; const mob=deckEl.clientWid
 new IntersectionObserver(es=>{ if(es[0].isIntersecting&&!dealt){ dealt=true; placeCards(!reduce); } },{threshold:.3}).observe(deckEl);
 addEventListener('resize',()=>placeCards(false));
 let modIO=null;
+/* ---------- products: a 360° ring ---------- */
+const PRD=[
+  {img:'img/p01.webp',href:'https://t.me/kurs360_ai',
+   uz:{tag:'Kurs',chip:'99 000 so‘mdan',name:'AI video kursi',d:'10 modul · 5-noyabrdan. Uslublar, ovoz, montaj, kanal o‘stirish va pul ishlash.',price:'99 000',unit:'so‘mdan · Pro 249 000',btn:'Kursga yozilish'},
+   ru:{tag:'Курс',chip:'от 99 000 сум',name:'Курс по ИИ-видео',d:'10 модулей · с 5 ноября. Стили, голос, монтаж, рост канала и заработок.',price:'99 000',unit:'сум · Pro 249 000',btn:'Записаться на курс'}},
+  {img:'img/p08.webp',href:'https://t.me/comix_admin',
+   uz:{tag:'Video buyurtma',short:'Buyurtma',chip:'Kelishuv asosida',name:'Videoni biz yasaymiz',d:'Ssenariy, ovoz, montaj va istalgan uslub. Siz faqat g‘oyani aytasiz.',price:'Kelishuv',unit:'asosida',btn:'Buyurtma berish'},
+   ru:{tag:'Заказ видео',short:'Заказ',chip:'Договорная цена',name:'Видео сделаем мы',d:'Сценарий, голос, монтаж и любой стиль. От вас — только идея.',price:'Договорная',unit:'цена',btn:'Заказать видео'}},
+  {img:'img/p09.webp',href:'https://t.me/+a5rpDsHlgP03M2Ri',
+   uz:{tag:'Yopiq kanal',chip:'19 000 so‘m / oy',name:'360 Kadr | Tajribalar',d:'Xatolarimiz, behuda ketgan tokenlar, foydali topilmalar va AI yangiliklari.',price:'19 000',unit:'so‘m / oy',btn:'Kanalga qo‘shilish'},
+   ru:{tag:'Закрытый канал',short:'Канал',chip:'19 000 сум / мес',name:'360 Kadr | Tajribalar',d:'Наши ошибки, впустую потраченные токены, полезные находки и новости ИИ.',price:'19 000',unit:'сум / мес',btn:'Вступить в канал'}},
+  {img:'img/p10.webp',href:'https://t.me/comix_admin',soon:true,
+   uz:{tag:'Video bot',chip:'Tez kunda',name:'Videongizni o‘zingiz yasang',d:'Videoni yuborasiz, uslub, subtitr, musiqa va ovozni tanlaysiz. AI tayyorlab beradi.',btn:'Birinchilardan bo‘lish'},
+   ru:{tag:'Видео-бот',chip:'Скоро',name:'Сделайте видео сами',d:'Отправляете видео, выбираете стиль, субтитры, музыку и голос. ИИ подготовит ролик.',btn:'Быть в числе первых'}}
+];
+const PRT={uz:{soon:'TEZ KUNDA',prev:'Oldingisi',next:'Keyingisi',aria:'Mahsulotlar aylanasi: strelkalar bilan almashtiring'},
+           ru:{soon:'СКОРО',prev:'Назад',next:'Вперёд',aria:'Круг продуктов: листайте стрелками'}};
+const prRing=document.getElementById('prRing'), prSpin=document.getElementById('prSpin'), prCore=document.getElementById('prCore'), prProg=document.getElementById('prProg');
+const PN=PRD.length, PSTEP=360/PN, PDUR=5000, PSIDES=['p-top','p-right','p-bottom','p-left'];
+const PARW='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+let pCur=0, pTurn=0, pAuto=!reduce, pTimer=null, pInView=false, pHover=false, pNodes=[];
+function renderProd(){
+  prSpin.innerHTML=PRD.map((p,i)=>{ const L=p[lang]||p.uz, a=(i*PSTEP-90)*Math.PI/180;
+    return `<button class="pr-node" type="button" data-i="${i}" style="left:${50+Math.cos(a)*41}%;top:${50+Math.sin(a)*41}%" aria-label="${L.tag}: ${L.chip}"><span class="up"><span class="face"><img src="${p.img}" alt="" loading="lazy"></span><span class="lb"><b>${L.short||L.tag}</b><i class="${p.soon?'s':''}">${L.chip}</i></span></span></button>`; }).join('');
+  pNodes=[...prSpin.children]; prRing.setAttribute('aria-label',PRT[lang].aria);
+  layoutProd(false); coreProd(); }
+function layoutProd(moving){
+  prSpin.style.transform=`rotate(${-pTurn}deg)`;
+  pNodes.forEach((n,i)=>{ n.querySelector('.up').style.transform=`rotate(${pTurn}deg)`;
+    const s=((i*PSTEP-pTurn)%360+360)%360; n.classList.remove(...PSIDES); n.classList.add(PSIDES[Math.round(s/PSTEP)%4]);
+    n.classList.toggle('on',i===pCur); n.classList.toggle('moving',!!moving&&!reduce); });
+  if(moving&&!reduce) setTimeout(()=>pNodes.forEach(n=>n.classList.remove('moving')),650); }
+function coreProd(){ const p=PRD[pCur], L=p[lang]||p.uz, T=PRT[lang];
+  prCore.innerHTML=`<div class="in"><span class="k">${L.tag}</span><h3>${L.name}</h3><p>${L.d}</p>${p.soon?`<span class="soon">${T.soon}</span>`:`<div class="price">${L.price}<small>${L.unit}</small></div>`}<a class="btn solid" href="${p.href}" target="_blank" rel="noopener">${L.btn}${PARW}</a><div class="pr-navs"><button type="button" data-d="-1" aria-label="${T.prev}"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7.5 2.5 4 6l3.5 3.5"/></svg></button><span>${pCur+1} / ${PN}</span><button type="button" data-d="1" aria-label="${T.next}"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button></div></div>`; }
+function goProd(i,user){ i=((i%PN)+PN)%PN; if(i===pCur&&!user) return;
+  let d=((i-pCur)%PN+PN)%PN; if(d>PN/2) d-=PN; pTurn+=d*PSTEP; pCur=i; layoutProd(true); coreProd();
+  if(user) stopProd(); else progProd(); }
+function progProd(){ if(!pAuto) return; prProg.classList.remove('run'); void prProg.getBoundingClientRect(); prProg.classList.add('run'); }
+function stopProd(){ pAuto=false; clearInterval(pTimer); prProg.classList.remove('run'); }
+prSpin.addEventListener('click',e=>{ const n=e.target.closest('.pr-node'); if(n) goProd(+n.dataset.i,true); });
+prCore.addEventListener('click',e=>{ const b=e.target.closest('[data-d]'); if(b) goProd(pCur+(+b.dataset.d),true); });
+prRing.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowDown'){ e.preventDefault(); goProd(pCur+1,true); } if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); goProd(pCur-1,true); } });
+prRing.addEventListener('pointerenter',e=>{ if(e.pointerType==='mouse'){ pHover=true; prProg.style.animationPlayState='paused'; } });
+prRing.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse'){ pHover=false; prProg.style.animationPlayState=''; } });
+let pSx=null, pSy=null;
+prRing.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'){ pSx=e.clientX; pSy=e.clientY; } });
+prRing.addEventListener('pointerup',e=>{ if(pSx===null) return; const dx=e.clientX-pSx, dy=e.clientY-pSy; pSx=null;
+  if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3) goProd(pCur+(dx<0?1:-1),true); });
+new IntersectionObserver(es=>{ const was=pInView; pInView=es[0].isIntersecting;
+  if(pInView&&!was&&pAuto){ clearInterval(pTimer); pTimer=setInterval(()=>{ if(pAuto&&pInView&&!pHover&&!document.hidden) goProd(pCur+1,false); },PDUR); progProd(); } },{threshold:.35}).observe(prRing);
 
 /* =========================================================
    HERO STAGE: every style on one 360° turntable
