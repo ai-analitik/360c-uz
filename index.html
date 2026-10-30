@@ -674,7 +674,7 @@ const PRT={uz:{soon:'TEZ KUNDA',prev:'Oldingisi',next:'Keyingisi',aria:'Mahsulot
 const prRing=document.getElementById('prRing'), prSpin=document.getElementById('prSpin'), prCore=document.getElementById('prCore'), prProg=document.getElementById('prProg');
 const PN=PRD.length, PSTEP=360/PN, PDUR=5000, PSIDES=['p-top','p-right','p-bottom','p-left'];
 const PARW='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
-let pCur=0, pTurn=0, pAuto=!reduce, pTimer=null, pInView=false, pHover=false, pNodes=[];
+let pCur=0, pTurn=0, pAuto=!reduce, pTimer=null, pInView=false, pNodes=[];
 function renderProd(){
   prSpin.innerHTML=PRD.map((p,i)=>{ const L=p[lang]||p.uz, a=(i*PSTEP-90)*Math.PI/180;
     return `<button class="pr-node" type="button" data-i="${i}" style="left:${50+Math.cos(a)*41}%;top:${50+Math.sin(a)*41}%" aria-label="${L.tag}: ${L.chip}"><span class="up"><span class="face"><img src="${p.img}" alt="" loading="lazy"></span><span class="lb"><b>${L.short||L.tag}</b><i class="${p.soon?'s':''}">${L.chip}</i></span></span></button>`; }).join('');
@@ -690,20 +690,19 @@ function coreProd(){ const p=PRD[pCur], L=p[lang]||p.uz, T=PRT[lang];
   prCore.innerHTML=`<div class="in"><span class="k">${L.tag}</span><h3>${L.name}</h3><p>${L.d}</p>${p.soon?`<span class="soon">${T.soon}</span>`:`<div class="price">${L.price}<small>${L.unit}</small></div>`}<a class="btn solid" href="${p.href}" target="_blank" rel="noopener">${L.btn}${PARW}</a><div class="pr-navs"><button type="button" data-d="-1" aria-label="${T.prev}"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7.5 2.5 4 6l3.5 3.5"/></svg></button><span>${pCur+1} / ${PN}</span><button type="button" data-d="1" aria-label="${T.next}"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button></div></div>`; }
 function goProd(i,user){ i=((i%PN)+PN)%PN; if(i===pCur&&!user) return;
   let d=((i-pCur)%PN+PN)%PN; if(d>PN/2) d-=PN; pTurn+=d*PSTEP; pCur=i; layoutProd(true); coreProd();
-  if(user) stopProd(); else progProd(); }
+  if(user) restartProd(); else progProd(); }
 function progProd(){ if(!pAuto) return; prProg.classList.remove('run'); void prProg.getBoundingClientRect(); prProg.classList.add('run'); }
-function stopProd(){ pAuto=false; clearInterval(pTimer); prProg.classList.remove('run'); }
+/* the ring keeps turning on its own; a click jumps there and the 5 s count starts again */
+function restartProd(){ if(!pAuto) return; clearInterval(pTimer); pTimer=setInterval(()=>{ if(pAuto&&pInView&&!document.hidden) goProd(pCur+1,false); },PDUR); progProd(); }
 prSpin.addEventListener('click',e=>{ const n=e.target.closest('.pr-node'); if(n) goProd(+n.dataset.i,true); });
 prCore.addEventListener('click',e=>{ const b=e.target.closest('[data-d]'); if(b) goProd(pCur+(+b.dataset.d),true); });
 prRing.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowDown'){ e.preventDefault(); goProd(pCur+1,true); } if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); goProd(pCur-1,true); } });
-prRing.addEventListener('pointerenter',e=>{ if(e.pointerType==='mouse'){ pHover=true; prProg.style.animationPlayState='paused'; } });
-prRing.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse'){ pHover=false; prProg.style.animationPlayState=''; } });
 let pSx=null, pSy=null;
 prRing.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'){ pSx=e.clientX; pSy=e.clientY; } });
 prRing.addEventListener('pointerup',e=>{ if(pSx===null) return; const dx=e.clientX-pSx, dy=e.clientY-pSy; pSx=null;
   if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3) goProd(pCur+(dx<0?1:-1),true); });
 new IntersectionObserver(es=>{ const was=pInView; pInView=es[0].isIntersecting;
-  if(pInView&&!was&&pAuto){ clearInterval(pTimer); pTimer=setInterval(()=>{ if(pAuto&&pInView&&!pHover&&!document.hidden) goProd(pCur+1,false); },PDUR); progProd(); } },{threshold:.35}).observe(prRing);
+  if(pInView&&!was) restartProd(); },{threshold:.35}).observe(prRing);
 
 /* =========================================================
    HERO STAGE: every style on one 360° turntable
