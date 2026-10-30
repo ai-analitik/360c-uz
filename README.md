@@ -1,4 +1,6 @@
-# 360 Kadr — kurs va video buyurtma sayti (360c.uz)
+# 360 Kadr — kurs va video buyurtma sayti
+
+Sayt: https://360kadr.pages.dev
 
 med.comix jamoasining "AI bilan video yasash" kursi va video buyurtma xizmati sayti (UZ/RU).
 
@@ -10,4 +12,4 @@ med.comix jamoasining "AI bilan video yasash" kursi va video buyurtma xizmati sa
 
 Havolalar: bot t.me/kurs360_ai · admin t.me/comix_admin · kanal t.me/comix360
 
-Hosting: GitHub Pages (Settings → Pages → main / root). Domen ulanganda `CNAME` fayli qo'shiladi.
+Hosting: Cloudflare Pages (360kadr). `main` ga har push saytni avtomatik yangilaydi. Domen kerak bo'lsa: Cloudflare → 360kadr → Custom domains.
