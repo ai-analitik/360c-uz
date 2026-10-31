@@ -1,6 +1,6 @@
 # uzbe.agency — kurs va video buyurtma sayti
 
-Sayt: https://360kadr.pages.dev
+Sayt: https://uzbe-agency.pages.dev
 
 med.comix jamoasining "AI bilan video yasash" kursi va video buyurtma xizmati sayti (UZ/RU).
 
@@ -12,4 +12,4 @@ med.comix jamoasining "AI bilan video yasash" kursi va video buyurtma xizmati sa
 
 Havolalar: bot t.me/kurs360_ai · admin t.me/comix_admin · kanal t.me/comix360
 
-Hosting: Cloudflare Pages (360kadr). `main` ga har push saytni avtomatik yangilaydi. Domen kerak bo'lsa: Cloudflare → 360kadr → Custom domains.
+Hosting: Cloudflare Pages (uzbe-agency; eski 360kadr.pages.dev yangisiga yo'naltiradi). `main` ga har push saytni avtomatik yangilaydi. Domen kerak bo'lsa: Cloudflare → uzbe-agency → Custom domains.
