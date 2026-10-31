@@ -1,4 +1,4 @@
-# 360 Kadr — kurs va video buyurtma sayti
+# uzbe.agency — kurs va video buyurtma sayti
 
 Sayt: https://360kadr.pages.dev
 

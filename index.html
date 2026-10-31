@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>360 Kadr — AI bilan video yasash</title>
+<title>uzbe.agency — AI bilan video yasash</title>
 <meta name="description" content="Videoga buyurtma bering yoki yasashni biz bilan o‘rganing. med.comix jamoasining AI video kursi — 5-noyabrdan.">
 <meta name="theme-color" content="#100f0e">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -11,8 +11,8 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="360 Kadr">
-<meta property="og:title" content="360 Kadr — AI bilan video yasash">
+<meta property="og:site_name" content="uzbe.agency">
+<meta property="og:title" content="uzbe.agency — AI bilan video yasash">
 <meta property="og:description" content="Videoga buyurtma bering yoki yasashni biz bilan o‘rganing. 5-noyabrdan.">
 <meta property="og:image" content="https://360kadr.pages.dev/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -38,6 +38,7 @@
   color-scheme:dark;
   --ink:#100f0e; --ink2:#191715; --ink3:#23201d; --line:rgba(239,232,220,.13);
   --paper:#efe8dc; --mute:#a69f94; --dim:#6f695f;
+  --neon:#39ff6e;
   --ember:#ef8b5f; --terra:#b8462a;
   --f-display:"Prata",Georgia,"Times New Roman",serif;
   --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -69,6 +70,10 @@ header.top{position:fixed;left:0;right:0;top:0;z-index:50;padding-top:env(safe-a
 header.top .bar{display:flex;align-items:center;gap:20px;height:64px;padding-left:var(--gx);padding-right:var(--gxr);background:linear-gradient(to bottom,rgba(16,15,14,.86),rgba(16,15,14,.0));}
 .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;white-space:nowrap}
 .brand b{font-family:var(--f-display);font-weight:400;font-size:22px}
+.brand .wm{font-family:var(--f-body);font-weight:600;font-size:23px;letter-spacing:-.025em;color:var(--paper)}
+.brand .wm i{font-style:normal;color:var(--neon)}
+.brand:has(.wm){gap:0}
+.brand .ag{font-style:normal;font-family:var(--f-body);font-weight:500;font-size:23px;letter-spacing:-.025em;color:var(--mute)}
 .brand span{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
 nav.links{display:flex;gap:22px;margin-left:auto}
 nav.links a{text-decoration:none;font-size:14px;color:var(--mute);transition:color .2s}
@@ -373,7 +378,7 @@ footer .r{display:flex;gap:22px;flex-wrap:wrap}
 <header class="top">
   <div class="pstrip"><span class="lbl" data-i18n="strip_lbl">Loyihalarimiz</span><div class="marq" id="marq"></div></div>
   <div class="bar">
-    <a class="brand" href="#top"><b>360 Kadr</b></a>
+    <a class="brand" href="#top" aria-label="uzbe.agency"><b class="wm">uzbe<i>.</i></b><em class="ag">agency</em></a>
     <nav class="links" aria-label="Bo‘limlar">
       <a href="#mahsulotlar" data-i18n="nav_svc">Mahsulotlar</a>
       <a href="#dastur" data-i18n="nav_prog">Dastur</a>
@@ -546,7 +551,7 @@ footer .r{display:flex;gap:22px;flex-wrap:wrap}
 </div>
 
 <footer class="gut">
-  <span>360 Kadr</span>
+  <span>uzbe.agency</span>
   <div class="r">
     <a href="https://t.me/comix_admin" target="_blank" rel="noopener"><span data-i18n="f_q">Savollar</span>: t.me/comix_admin</a>
     <a href="https://t.me/comix360" target="_blank" rel="noopener"><span data-i18n="f_c">Kanal</span>: t.me/comix360</a>
@@ -663,8 +668,8 @@ const PRD=[
    uz:{tag:'Video buyurtma',short:'Buyurtma',chip:'Kelishuv asosida',name:'Videoni biz yasaymiz',d:'Ssenariy, ovoz, montaj va istalgan uslub. Siz faqat g‘oyani aytasiz.',price:'Kelishuv',unit:'asosida',btn:'Buyurtma berish'},
    ru:{tag:'Заказ видео',short:'Заказ',chip:'Договорная цена',name:'Видео сделаем мы',d:'Сценарий, голос, монтаж и любой стиль. От вас — только идея.',price:'Договорная',unit:'цена',btn:'Заказать видео'}},
   {img:'img/p09.webp',href:'https://t.me/comix_admin',  /* closed channel: via admin for now (invite link t.me/+a5rpDsHlgP03M2Ri) */
-   uz:{tag:'Yopiq kanal',chip:'19 000 so‘m / oy',name:'360 Kadr | Tajribalar',d:'Xatolarimiz, behuda ketgan tokenlar, foydali topilmalar va AI yangiliklari.',price:'19 000',unit:'so‘m / oy',btn:'Kanalga qo‘shilish'},
-   ru:{tag:'Закрытый канал',short:'Канал',chip:'19 000 сум / мес',name:'360 Kadr | Tajribalar',d:'Наши ошибки, впустую потраченные токены, полезные находки и новости ИИ.',price:'19 000',unit:'сум / мес',btn:'Вступить в канал'}},
+   uz:{tag:'Yopiq kanal',chip:'19 000 so‘m / oy',name:'uzbe.agency | Tajribalar',d:'Xatolarimiz, behuda ketgan tokenlar, foydali topilmalar va AI yangiliklari.',price:'19 000',unit:'so‘m / oy',btn:'Kanalga qo‘shilish'},
+   ru:{tag:'Закрытый канал',short:'Канал',chip:'19 000 сум / мес',name:'uzbe.agency | Tajribalar',d:'Наши ошибки, впустую потраченные токены, полезные находки и новости ИИ.',price:'19 000',unit:'сум / мес',btn:'Вступить в канал'}},
   {img:'img/p10.webp',href:'https://t.me/comix_admin',soon:true,
    uz:{tag:'Video bot',chip:'Tez kunda',name:'Videongizni o‘zingiz yasang',d:'Videoni yuborasiz, uslub, subtitr, musiqa va ovozni tanlaysiz. AI tayyorlab beradi.',btn:'Birinchilardan bo‘lish'},
    ru:{tag:'Видео-бот',chip:'Скоро',name:'Сделайте видео сами',d:'Отправляете видео, выбираете стиль, субтитры, музыку и голос. ИИ подготовит ролик.',btn:'Быть в числе первых'}}
@@ -801,7 +806,7 @@ else {
     g.lineWidth=5; g.strokeStyle='rgba(239,139,95,.95)'; g.beginPath(); g.moveTo(Math.cos(ph)*1006,Math.sin(ph)*1006); g.lineTo(Math.cos(ph)*940,Math.sin(ph)*940); g.stroke();
     g.save(); g.rotate(ph-Math.PI/2); g.fillStyle=c.plus?'rgba(239,139,95,.95)':'rgba(239,232,220,.85)'; g.font='64px "JetBrains Mono", monospace'; if(c.plus) g.fillText('+',0,880); g.restore(); });
   g.font='36px "JetBrains Mono", monospace'; g.fillStyle='rgba(239,232,220,.30)';
-  const ring=' 360 KADR · MED.COMIX JAMOASI · 13+ USLUB · VA YANA BOSHQALAR ·'; const chars=[...(ring+ring)];
+  const ring=' UZBE.AGENCY · MED.COMIX JAMOASI · 13+ USLUB · VA YANA BOSHQALAR ·'; const chars=[...(ring+ring)];
   chars.forEach((ch,i)=>{ const a=i/chars.length*Math.PI*2; g.save(); g.rotate(a); g.fillText(ch,0,-720); g.restore(); });
   }
   drawDial();
